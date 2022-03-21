@@ -5,6 +5,11 @@ import java.util.function.Supplier;
 @FunctionalInterface
 public interface ThrowingSupplier<T> extends Supplier<T>
 {
+	static <T> Supplier<T> unchecked(ThrowingSupplier<T> throwingSupplier)
+	{
+		return throwingSupplier;
+	}
+
 	@Override
 	default T get()
 	{

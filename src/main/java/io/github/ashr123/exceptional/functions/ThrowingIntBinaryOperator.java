@@ -5,6 +5,11 @@ import java.util.function.IntBinaryOperator;
 @FunctionalInterface
 public interface ThrowingIntBinaryOperator extends IntBinaryOperator
 {
+	static IntBinaryOperator unchecked(ThrowingIntBinaryOperator throwingIntBinaryOperator)
+	{
+		return throwingIntBinaryOperator;
+	}
+
 	@Override
 	default int applyAsInt(int left, int right)
 	{

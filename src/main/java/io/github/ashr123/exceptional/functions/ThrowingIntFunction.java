@@ -5,6 +5,11 @@ import java.util.function.IntFunction;
 @FunctionalInterface
 public interface ThrowingIntFunction<R> extends IntFunction<R>
 {
+	static <R> IntFunction<R> unchecked(ThrowingIntFunction<R> throwingIntFunction)
+	{
+		return throwingIntFunction;
+	}
+
 	@Override
 	default R apply(int value)
 	{

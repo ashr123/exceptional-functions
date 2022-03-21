@@ -5,6 +5,11 @@ import java.util.function.DoubleUnaryOperator;
 @FunctionalInterface
 public interface ThrowingDoubleUnaryOperator extends DoubleUnaryOperator
 {
+	static DoubleUnaryOperator unchecked(ThrowingDoubleUnaryOperator throwingDoubleUnaryOperator)
+	{
+		return throwingDoubleUnaryOperator;
+	}
+
 	@Override
 	default double applyAsDouble(double operand)
 	{

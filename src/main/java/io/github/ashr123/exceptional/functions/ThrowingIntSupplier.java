@@ -5,6 +5,11 @@ import java.util.function.IntSupplier;
 @FunctionalInterface
 public interface ThrowingIntSupplier extends IntSupplier
 {
+	static IntSupplier unchecked(ThrowingIntSupplier throwingIntSupplier)
+	{
+		return throwingIntSupplier;
+	}
+
 	@Override
 	default int getAsInt()
 	{

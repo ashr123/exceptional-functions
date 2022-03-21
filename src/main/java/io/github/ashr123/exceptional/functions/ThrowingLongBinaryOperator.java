@@ -5,6 +5,11 @@ import java.util.function.LongBinaryOperator;
 @FunctionalInterface
 public interface ThrowingLongBinaryOperator extends LongBinaryOperator
 {
+	static LongBinaryOperator unchecked(ThrowingLongBinaryOperator throwingLongBinaryOperator)
+	{
+		return throwingLongBinaryOperator;
+	}
+
 	@Override
 	default long applyAsLong(long left, long right)
 	{

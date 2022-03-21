@@ -5,6 +5,11 @@ import java.util.function.DoubleFunction;
 @FunctionalInterface
 public interface ThrowingDoubleFunction<R> extends DoubleFunction<R>
 {
+	static <R> DoubleFunction<R> unchecked(ThrowingDoubleFunction<R> throwingDoubleFunction)
+	{
+		return throwingDoubleFunction;
+	}
+
 	@Override
 	default R apply(double value)
 	{

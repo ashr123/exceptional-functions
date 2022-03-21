@@ -5,6 +5,11 @@ import java.util.function.ObjLongConsumer;
 @FunctionalInterface
 public interface ThrowingObjLongConsumer<T> extends ObjLongConsumer<T>
 {
+	static <T> ObjLongConsumer<T> unchecked(ThrowingObjLongConsumer<T> throwingObjLongConsumer)
+	{
+		return throwingObjLongConsumer;
+	}
+
 	@Override
 	default void accept(T t, long value)
 	{

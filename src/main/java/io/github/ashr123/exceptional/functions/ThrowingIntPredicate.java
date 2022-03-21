@@ -5,6 +5,11 @@ import java.util.function.IntPredicate;
 @FunctionalInterface
 public interface ThrowingIntPredicate extends IntPredicate
 {
+	static IntPredicate unchecked(ThrowingIntPredicate throwingIntPredicate)
+	{
+		return throwingIntPredicate;
+	}
+
 	@Override
 	default boolean test(int value)
 	{

@@ -5,6 +5,11 @@ import java.util.function.IntUnaryOperator;
 @FunctionalInterface
 public interface ThrowingIntUnaryOperator extends IntUnaryOperator
 {
+	static IntUnaryOperator unchecked(ThrowingIntUnaryOperator throwingIntUnaryOperator)
+	{
+		return throwingIntUnaryOperator;
+	}
+
 	@Override
 	default int applyAsInt(int operand)
 	{

@@ -5,6 +5,11 @@ import java.util.function.ToDoubleFunction;
 @FunctionalInterface
 public interface ThrowingToDoubleFunction<T> extends ToDoubleFunction<T>
 {
+	static <T> ToDoubleFunction<T> unchecked(ThrowingToDoubleFunction<T> throwingToDoubleFunction)
+	{
+		return throwingToDoubleFunction;
+	}
+
 	@Override
 	default double applyAsDouble(T value)
 	{

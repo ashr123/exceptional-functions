@@ -5,6 +5,11 @@ import java.util.function.Predicate;
 @FunctionalInterface
 public interface ThrowingPredicate<T> extends Predicate<T>
 {
+	static <T> Predicate<T> unchecked(ThrowingPredicate<T> throwingPredicate)
+	{
+		return throwingPredicate;
+	}
+
 	@Override
 	default boolean test(T t)
 	{

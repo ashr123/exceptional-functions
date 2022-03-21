@@ -5,6 +5,11 @@ import java.util.function.ToLongFunction;
 @FunctionalInterface
 public interface ThrowingToLongFunction<T> extends ToLongFunction<T>
 {
+	static <T> ToLongFunction<T> unchecked(ThrowingToLongFunction<T> throwingToLongFunction)
+	{
+		return throwingToLongFunction;
+	}
+
 	@Override
 	default long applyAsLong(T value)
 	{

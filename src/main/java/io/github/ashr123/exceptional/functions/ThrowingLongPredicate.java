@@ -5,6 +5,11 @@ import java.util.function.LongPredicate;
 @FunctionalInterface
 public interface ThrowingLongPredicate extends LongPredicate
 {
+	static LongPredicate unchecked(ThrowingLongPredicate throwingLongPredicate)
+	{
+		return throwingLongPredicate;
+	}
+
 	@Override
 	default boolean test(long value)
 	{

@@ -5,6 +5,11 @@ import java.util.function.DoublePredicate;
 @FunctionalInterface
 public interface ThrowingDoublePredicate extends DoublePredicate
 {
+	static DoublePredicate unchecked(ThrowingDoublePredicate throwingDoublePredicate)
+	{
+		return throwingDoublePredicate;
+	}
+
 	@Override
 	default boolean test(double value)
 	{

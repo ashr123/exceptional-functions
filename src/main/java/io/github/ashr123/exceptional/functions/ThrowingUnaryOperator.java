@@ -1,10 +1,26 @@
 package io.github.ashr123.exceptional.functions;
 
+import java.util.function.UnaryOperator;
+
 @FunctionalInterface
-public interface ThrowingUnaryOperator<T> extends ThrowingFunction<T, T>
+public interface ThrowingUnaryOperator<T> extends UnaryOperator<T>
 {
-	static <T> ThrowingUnaryOperator<T> identity()
+	static <T> UnaryOperator<T> unchecked(ThrowingUnaryOperator<T> throwingUnaryOperator)
 	{
-		return t -> t;
+		return throwingUnaryOperator;
 	}
+
+	@Override
+	default T apply(T t)
+	{
+		try
+		{
+			return applyThrows(t);
+		} catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	T applyThrows(T t) throws Exception;
 }

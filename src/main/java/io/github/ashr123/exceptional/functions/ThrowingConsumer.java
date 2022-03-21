@@ -5,6 +5,11 @@ import java.util.function.Consumer;
 @FunctionalInterface
 public interface ThrowingConsumer<T> extends Consumer<T>
 {
+	static <T> Consumer<T> unchecked(ThrowingConsumer<T> throwingConsumer)
+	{
+		return throwingConsumer;
+	}
+
 	@Override
 	default void accept(final T t)
 	{

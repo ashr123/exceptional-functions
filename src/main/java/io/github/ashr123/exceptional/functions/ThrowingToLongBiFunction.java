@@ -5,6 +5,11 @@ import java.util.function.ToLongBiFunction;
 @FunctionalInterface
 public interface ThrowingToLongBiFunction<T, U> extends ToLongBiFunction<T, U>
 {
+	static <T, U> ToLongBiFunction<T, U> throwingToLongBiFunction(ThrowingToLongBiFunction<T, U> throwingToLongBiFunction)
+	{
+		return throwingToLongBiFunction;
+	}
+
 	@Override
 	default long applyAsLong(T t, U u)
 	{

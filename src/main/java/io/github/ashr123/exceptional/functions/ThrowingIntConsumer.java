@@ -5,6 +5,11 @@ import java.util.function.IntConsumer;
 @FunctionalInterface
 public interface ThrowingIntConsumer extends IntConsumer
 {
+	static IntConsumer unchecked(ThrowingIntConsumer throwingIntConsumer)
+	{
+		return throwingIntConsumer;
+	}
+
 	@Override
 	default void accept(int value)
 	{
