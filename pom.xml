@@ -6,7 +6,7 @@
 
 	<groupId>io.github.ashr123</groupId>
 	<artifactId>exceptional-functions</artifactId>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 
 	<name>Exceptional Functions</name>
 	<description>A collection of functions that protect against unchecked Exceptions</description>

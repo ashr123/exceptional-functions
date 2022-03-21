@@ -5,7 +5,7 @@ import java.util.function.ToLongBiFunction;
 @FunctionalInterface
 public interface ThrowingToLongBiFunction<T, U> extends ToLongBiFunction<T, U>
 {
-	static <T, U> ToLongBiFunction<T, U> throwingToLongBiFunction(ThrowingToLongBiFunction<T, U> throwingToLongBiFunction)
+	static <T, U> ToLongBiFunction<T, U> unchecked(ThrowingToLongBiFunction<T, U> throwingToLongBiFunction)
 	{
 		return throwingToLongBiFunction;
 	}
