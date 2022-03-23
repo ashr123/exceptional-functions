@@ -5,11 +5,6 @@ import java.util.function.DoubleToLongFunction;
 @FunctionalInterface
 public interface ThrowingDoubleToLongFunction extends DoubleToLongFunction
 {
-	static DoubleToLongFunction unchecked(ThrowingDoubleToLongFunction throwingDoubleToLongFunction)
-	{
-		return throwingDoubleToLongFunction;
-	}
-
 	@Override
 	default long applyAsLong(double value)
 	{

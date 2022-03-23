@@ -3,11 +3,6 @@ package io.github.ashr123.exceptional.functions;
 @FunctionalInterface
 public interface ThrowingRunnable extends Runnable
 {
-	static Runnable unchecked(ThrowingRunnable throwingRunnable)
-	{
-		return throwingRunnable;
-	}
-
 	@Override
 	default void run()
 	{

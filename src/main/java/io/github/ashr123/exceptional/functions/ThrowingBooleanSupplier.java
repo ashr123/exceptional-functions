@@ -5,11 +5,6 @@ import java.util.function.BooleanSupplier;
 @FunctionalInterface
 public interface ThrowingBooleanSupplier extends BooleanSupplier
 {
-	static BooleanSupplier unchecked(ThrowingBooleanSupplier throwingBooleanSupplier)
-	{
-		return throwingBooleanSupplier;
-	}
-
 	@Override
 	default boolean getAsBoolean()
 	{

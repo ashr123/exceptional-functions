@@ -5,11 +5,6 @@ import java.util.function.LongSupplier;
 @FunctionalInterface
 public interface ThrowingLongSupplier extends LongSupplier
 {
-	static LongSupplier unchecked(ThrowingLongSupplier throwingLongSupplier)
-	{
-		return throwingLongSupplier;
-	}
-
 	@Override
 	default long getAsLong()
 	{

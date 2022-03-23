@@ -5,11 +5,6 @@ import java.util.function.DoubleBinaryOperator;
 @FunctionalInterface
 public interface ThrowingDoubleBinaryOperator extends DoubleBinaryOperator
 {
-	static DoubleBinaryOperator unchecked(ThrowingDoubleBinaryOperator throwingDoubleBinaryOperator)
-	{
-		return throwingDoubleBinaryOperator;
-	}
-
 	@Override
 	default double applyAsDouble(double left, double right)
 	{

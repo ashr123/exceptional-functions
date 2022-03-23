@@ -5,11 +5,6 @@ import java.util.function.DoubleToIntFunction;
 @FunctionalInterface
 public interface ThrowingDoubleToIntFunction extends DoubleToIntFunction
 {
-	static DoubleToIntFunction unchecked(ThrowingDoubleToIntFunction throwingDoubleToIntFunction)
-	{
-		return throwingDoubleToIntFunction;
-	}
-
 	@Override
 	default int applyAsInt(double value)
 	{

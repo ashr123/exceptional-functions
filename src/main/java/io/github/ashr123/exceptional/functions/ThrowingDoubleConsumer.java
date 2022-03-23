@@ -5,11 +5,6 @@ import java.util.function.DoubleConsumer;
 @FunctionalInterface
 public interface ThrowingDoubleConsumer extends DoubleConsumer
 {
-	static DoubleConsumer unchecked(ThrowingDoubleConsumer throwingDoubleConsumer)
-	{
-		return throwingDoubleConsumer;
-	}
-
 	@Override
 	default void accept(double value)
 	{
