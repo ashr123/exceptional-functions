@@ -18,7 +18,7 @@ public interface ThrowingIntPredicate extends IntPredicate
 			return testThrows(value);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

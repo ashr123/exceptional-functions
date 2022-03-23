@@ -18,7 +18,7 @@ public interface ThrowingToDoubleFunction<T> extends ToDoubleFunction<T>
 			return applyAsDoubleThrows(value);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

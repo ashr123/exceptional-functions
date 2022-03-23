@@ -18,7 +18,7 @@ public interface ThrowingObjLongConsumer<T> extends ObjLongConsumer<T>
 			acceptThrows(t, value);
 		} catch (Throwable e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

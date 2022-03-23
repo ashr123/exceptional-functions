@@ -18,14 +18,9 @@ public interface ThrowingConsumer<T> extends Consumer<T>
 			acceptThrows(t);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 
-	/**
-	 * Performs this operation on the given argument.
-	 *
-	 * @param t the input argument
-	 */
 	void acceptThrows(T t) throws Exception;
 }

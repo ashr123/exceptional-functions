@@ -18,7 +18,7 @@ public interface ThrowingDoubleUnaryOperator extends DoubleUnaryOperator
 			return applyAsDoubleThrows(operand);
 		} catch (Exception e)
 		{
-			throw new IllegalStateException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

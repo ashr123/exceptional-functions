@@ -18,7 +18,7 @@ public interface ThrowingDoubleToLongFunction extends DoubleToLongFunction
 			return applyAsLongThrows(value);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

@@ -18,7 +18,7 @@ public interface ThrowingSupplier<T> extends Supplier<T>
 			return getThrows();
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

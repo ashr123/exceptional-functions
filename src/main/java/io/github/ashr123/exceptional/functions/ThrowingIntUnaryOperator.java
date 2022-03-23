@@ -18,7 +18,7 @@ public interface ThrowingIntUnaryOperator extends IntUnaryOperator
 			return applyAsIntThrows(operand);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

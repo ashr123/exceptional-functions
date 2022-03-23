@@ -18,7 +18,7 @@ public interface ThrowingObjDoubleConsumer<T> extends ObjDoubleConsumer<T>
 			acceptThrows(t, value);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

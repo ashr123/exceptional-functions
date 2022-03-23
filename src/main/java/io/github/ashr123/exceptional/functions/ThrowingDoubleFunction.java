@@ -18,7 +18,7 @@ public interface ThrowingDoubleFunction<R> extends DoubleFunction<R>
 			return applyThrows(value);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

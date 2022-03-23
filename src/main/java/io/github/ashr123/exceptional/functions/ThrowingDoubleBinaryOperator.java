@@ -18,7 +18,7 @@ public interface ThrowingDoubleBinaryOperator extends DoubleBinaryOperator
 			return applyAsDoubleThrows(left, right);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

@@ -18,7 +18,7 @@ public interface ThrowingBiConsumer<T, U> extends BiConsumer<T, U>
 			acceptThrows(t, u);
 		} catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 

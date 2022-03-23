@@ -18,7 +18,7 @@ public interface ThrowingDoubleToIntFunction extends DoubleToIntFunction
 			return applyAsIntThrows(value);
 		} catch (Exception e)
 		{
-			throw new IllegalStateException(e);
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 
