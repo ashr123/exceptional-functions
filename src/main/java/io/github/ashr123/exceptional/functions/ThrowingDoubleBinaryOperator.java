@@ -13,7 +13,7 @@ public interface ThrowingDoubleBinaryOperator extends DoubleBinaryOperator
 			return applyAsDoubleThrows(left, right);
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

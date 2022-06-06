@@ -18,7 +18,7 @@ public interface ThrowingToDoubleBiFunction<T, U> extends ToDoubleBiFunction<T, 
 			return applyAsDoubleThrows(t, u);
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

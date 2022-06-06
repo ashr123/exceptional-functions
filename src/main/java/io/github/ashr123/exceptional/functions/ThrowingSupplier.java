@@ -1,9 +1,10 @@
 package io.github.ashr123.exceptional.functions;
 
+import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 @FunctionalInterface
-public interface ThrowingSupplier<T> extends Supplier<T>
+public interface ThrowingSupplier<T> extends Supplier<T>, Callable<T>
 {
 	static <T> Supplier<T> unchecked(ThrowingSupplier<T> throwingSupplier)
 	{
@@ -15,12 +16,10 @@ public interface ThrowingSupplier<T> extends Supplier<T>
 	{
 		try
 		{
-			return getThrows();
+			return call();
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
-
-	T getThrows() throws Exception;
 }

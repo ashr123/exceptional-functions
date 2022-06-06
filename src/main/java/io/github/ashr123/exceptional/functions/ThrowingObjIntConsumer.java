@@ -16,9 +16,9 @@ public interface ThrowingObjIntConsumer<T> extends ObjIntConsumer<T>
 		try
 		{
 			acceptThrows(t, value);
-		} catch (Throwable e)
+		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

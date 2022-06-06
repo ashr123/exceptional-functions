@@ -18,7 +18,7 @@ public interface ThrowingBiFunction<T, U, R> extends BiFunction<T, U, R>
 			return applyThrows(t, u);
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

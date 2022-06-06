@@ -18,7 +18,7 @@ public interface ThrowingPredicate<T> extends Predicate<T>
 			return testThrows(t);
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

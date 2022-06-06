@@ -18,7 +18,7 @@ public interface ThrowingFunction<T, R> extends Function<T, R>
 			return applyThrows(t);
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

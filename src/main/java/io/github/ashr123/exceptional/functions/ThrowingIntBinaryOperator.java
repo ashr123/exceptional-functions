@@ -13,7 +13,7 @@ public interface ThrowingIntBinaryOperator extends IntBinaryOperator
 			return applyAsIntThrows(left, right);
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

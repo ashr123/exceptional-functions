@@ -13,7 +13,7 @@ public interface ThrowingDoubleToIntFunction extends DoubleToIntFunction
 			return applyAsIntThrows(value);
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

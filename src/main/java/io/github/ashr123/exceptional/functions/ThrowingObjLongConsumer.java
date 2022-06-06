@@ -16,11 +16,11 @@ public interface ThrowingObjLongConsumer<T> extends ObjLongConsumer<T>
 		try
 		{
 			acceptThrows(t, value);
-		} catch (Throwable e)
+		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 
-	void acceptThrows(T t, long value) throws Throwable;
+	void acceptThrows(T t, long value) throws Exception;
 }

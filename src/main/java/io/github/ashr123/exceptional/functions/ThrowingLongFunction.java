@@ -18,7 +18,7 @@ public interface ThrowingLongFunction<R> extends LongFunction<R>
 			return applyThrows(value);
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 

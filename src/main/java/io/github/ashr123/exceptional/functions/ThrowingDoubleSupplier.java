@@ -13,7 +13,7 @@ public interface ThrowingDoubleSupplier extends DoubleSupplier
 			return getAsDoubleThrows();
 		} catch (Exception e)
 		{
-			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
+			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
 
