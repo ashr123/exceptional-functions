@@ -3,16 +3,12 @@ package io.github.ashr123.exceptional.functions;
 import java.util.function.DoubleToIntFunction;
 
 @FunctionalInterface
-public interface ThrowingDoubleToIntFunction extends DoubleToIntFunction
-{
+public interface ThrowingDoubleToIntFunction extends DoubleToIntFunction {
 	@Override
-	default int applyAsInt(double value)
-	{
-		try
-		{
+	default int applyAsInt(double value) {
+		try {
 			return applyAsIntThrows(value);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			throw ThrowingUtils.getRuntimeException(e);
 		}
 	}
