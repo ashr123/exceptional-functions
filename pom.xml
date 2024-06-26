@@ -6,7 +6,7 @@
 
 	<groupId>io.github.ashr123</groupId>
 	<artifactId>exceptional-functions</artifactId>
-	<version>1.3.1</version>
+	<version>1.4.1</version>
 
 	<name>Exceptional Functions</name>
 	<description>A collection of functions that protect against unchecked Exceptions</description>
@@ -15,7 +15,7 @@
 	<licenses>
 		<license>
 			<name>MIT License</name>
-			<url>${project.url}/blob/master/LICENSE</url>
+			<url>${project.url}/blob/master/LICENSE.md</url>
 		</license>
 	</licenses>
 

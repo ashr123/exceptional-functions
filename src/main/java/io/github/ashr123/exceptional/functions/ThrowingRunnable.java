@@ -1,15 +1,19 @@
 package io.github.ashr123.exceptional.functions;
 
 @FunctionalInterface
-public interface ThrowingRunnable extends Runnable {
+public interface ThrowingRunnable<X extends Throwable> extends Runnable {
+	static Runnable unchecked(ThrowingRunnable<?> runnable) {
+		return runnable;
+	}
+
 	@Override
 	default void run() {
 		try {
 			runThrows();
-		} catch (Exception e) {
-			throw ThrowingUtils.getRuntimeException(e);
+		} catch (Throwable x) {
+			ThrowingUtils.sneakyThrow(x);
 		}
 	}
 
-	void runThrows() throws Exception;
+	void runThrows() throws X;
 }

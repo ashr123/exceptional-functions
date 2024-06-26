@@ -3,15 +3,19 @@ package io.github.ashr123.exceptional.functions;
 import java.util.function.DoubleUnaryOperator;
 
 @FunctionalInterface
-public interface ThrowingDoubleUnaryOperator extends DoubleUnaryOperator {
+public interface ThrowingDoubleUnaryOperator<X extends Throwable> extends DoubleUnaryOperator {
+	static DoubleUnaryOperator unchecked(ThrowingDoubleUnaryOperator<?> doubleUnaryOperator) {
+		return doubleUnaryOperator;
+	}
+
 	@Override
 	default double applyAsDouble(double operand) {
 		try {
 			return applyAsDoubleThrows(operand);
-		} catch (Exception e) {
-			throw ThrowingUtils.getRuntimeException(e);
+		} catch (Throwable x) {
+			throw ThrowingUtils.sneakyThrow(x);
 		}
 	}
 
-	double applyAsDoubleThrows(double operand) throws Exception;
+	double applyAsDoubleThrows(double operand) throws X;
 }

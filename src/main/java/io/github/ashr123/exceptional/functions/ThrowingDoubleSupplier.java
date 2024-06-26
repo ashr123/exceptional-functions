@@ -3,15 +3,19 @@ package io.github.ashr123.exceptional.functions;
 import java.util.function.DoubleSupplier;
 
 @FunctionalInterface
-public interface ThrowingDoubleSupplier extends DoubleSupplier {
+public interface ThrowingDoubleSupplier<X extends Throwable> extends DoubleSupplier {
+	static DoubleSupplier unchecked(ThrowingDoubleSupplier<?> doubleSupplier) {
+		return doubleSupplier;
+	}
+
 	@Override
 	default double getAsDouble() {
 		try {
 			return getAsDoubleThrows();
-		} catch (Exception e) {
-			throw ThrowingUtils.getRuntimeException(e);
+		} catch (Throwable x) {
+			throw ThrowingUtils.sneakyThrow(x);
 		}
 	}
 
-	double getAsDoubleThrows() throws Exception;
+	double getAsDoubleThrows() throws X;
 }

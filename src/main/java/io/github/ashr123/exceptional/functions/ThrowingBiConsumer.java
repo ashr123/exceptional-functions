@@ -3,8 +3,8 @@ package io.github.ashr123.exceptional.functions;
 import java.util.function.BiConsumer;
 
 @FunctionalInterface
-public interface ThrowingBiConsumer<T, U> extends BiConsumer<T, U> {
-	static <T, U> BiConsumer<T, U> unchecked(ThrowingBiConsumer<T, U> throwingBiConsumer) {
+public interface ThrowingBiConsumer<T, U, X extends Throwable> extends BiConsumer<T, U> {
+	static <T, U> BiConsumer<T, U> unchecked(ThrowingBiConsumer<T, U, ?> throwingBiConsumer) {
 		return throwingBiConsumer;
 	}
 
@@ -12,10 +12,10 @@ public interface ThrowingBiConsumer<T, U> extends BiConsumer<T, U> {
 	default void accept(T t, U u) {
 		try {
 			acceptThrows(t, u);
-		} catch (Exception e) {
-			throw ThrowingUtils.getRuntimeException(e);
+		} catch (Throwable x) {
+			ThrowingUtils.sneakyThrow(x);
 		}
 	}
 
-	void acceptThrows(T t, U u) throws Exception;
+	void acceptThrows(T t, U u) throws X;
 }

@@ -3,8 +3,8 @@ package io.github.ashr123.exceptional.functions;
 import java.util.function.ToIntFunction;
 
 @FunctionalInterface
-public interface ThrowingToIntFunction<T> extends ToIntFunction<T> {
-	static <T> ToIntFunction<T> unchecked(ThrowingToIntFunction<T> throwingToIntFunction) {
+public interface ThrowingToIntFunction<T, X extends Throwable> extends ToIntFunction<T> {
+	static <T> ToIntFunction<T> unchecked(ThrowingToIntFunction<T, ?> throwingToIntFunction) {
 		return throwingToIntFunction;
 	}
 
@@ -12,10 +12,10 @@ public interface ThrowingToIntFunction<T> extends ToIntFunction<T> {
 	default int applyAsInt(T value) {
 		try {
 			return applyAsIntThrows(value);
-		} catch (Exception e) {
-			throw ThrowingUtils.getRuntimeException(e);
+		} catch (Throwable x) {
+			throw ThrowingUtils.sneakyThrow(x);
 		}
 	}
 
-	int applyAsIntThrows(T value) throws Exception;
+	int applyAsIntThrows(T value) throws X;
 }

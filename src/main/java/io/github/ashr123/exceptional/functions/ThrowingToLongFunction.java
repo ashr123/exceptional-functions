@@ -3,8 +3,8 @@ package io.github.ashr123.exceptional.functions;
 import java.util.function.ToLongFunction;
 
 @FunctionalInterface
-public interface ThrowingToLongFunction<T> extends ToLongFunction<T> {
-	static <T> ToLongFunction<T> unchecked(ThrowingToLongFunction<T> throwingToLongFunction) {
+public interface ThrowingToLongFunction<T, X extends Throwable> extends ToLongFunction<T> {
+	static <T> ToLongFunction<T> unchecked(ThrowingToLongFunction<T, ?> throwingToLongFunction) {
 		return throwingToLongFunction;
 	}
 
@@ -12,10 +12,10 @@ public interface ThrowingToLongFunction<T> extends ToLongFunction<T> {
 	default long applyAsLong(T value) {
 		try {
 			return applyAsLongThrows(value);
-		} catch (Exception e) {
-			throw ThrowingUtils.getRuntimeException(e);
+		} catch (Throwable x) {
+			throw ThrowingUtils.sneakyThrow(x);
 		}
 	}
 
-	long applyAsLongThrows(T value) throws Exception;
+	long applyAsLongThrows(T value) throws X;
 }

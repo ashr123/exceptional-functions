@@ -3,15 +3,19 @@ package io.github.ashr123.exceptional.functions;
 import java.util.function.LongConsumer;
 
 @FunctionalInterface
-public interface ThrowingLongConsumer extends LongConsumer {
+public interface ThrowingLongConsumer<X extends Throwable> extends LongConsumer {
+	static LongConsumer unchecked(ThrowingLongConsumer<?> longConsumer) {
+		return longConsumer;
+	}
+
 	@Override
 	default void accept(long value) {
 		try {
 			acceptThrows(value);
-		} catch (Exception e) {
-			throw ThrowingUtils.getRuntimeException(e);
+		} catch (Throwable x) {
+			ThrowingUtils.sneakyThrow(x);
 		}
 	}
 
-	void acceptThrows(long value) throws Exception;
+	void acceptThrows(long value) throws X;
 }

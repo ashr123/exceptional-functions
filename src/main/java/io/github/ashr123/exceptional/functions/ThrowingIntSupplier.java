@@ -3,15 +3,19 @@ package io.github.ashr123.exceptional.functions;
 import java.util.function.IntSupplier;
 
 @FunctionalInterface
-public interface ThrowingIntSupplier extends IntSupplier {
+public interface ThrowingIntSupplier<X extends Throwable> extends IntSupplier {
+	static IntSupplier unchecked(ThrowingIntSupplier<?> intSupplier) {
+		return intSupplier;
+	}
+
 	@Override
 	default int getAsInt() {
 		try {
 			return getAsIntThrows();
-		} catch (Exception e) {
-			throw ThrowingUtils.getRuntimeException(e);
+		} catch (Throwable x) {
+			throw ThrowingUtils.sneakyThrow(x);
 		}
 	}
 
-	int getAsIntThrows() throws Exception;
+	int getAsIntThrows() throws X;
 }
