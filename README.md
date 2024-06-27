@@ -18,8 +18,8 @@ import java.net.URL;
 public class Example {
     public static Stream<InputStream> exampleWithCasting() {
         return Stream.of("https://www.google.com",
-                        "https://www.ynet.com/",
-                        "https://www,stackoverflow.com")
+						"https://www.ynet.co.il/",
+						"https://www.stackoverflow.com")
                 .map(URI::create)
                 .map((ThrowingFunction<URI, URL, MalformedURLException>) URI::toURL)
                 .map((ThrowingFunction<URL, InputStream, IOException>) URL::openStream);
@@ -27,8 +27,8 @@ public class Example {
 
     public static Stream<InputStream> exampleWithCallingUnchecked() {
         return Stream.of("https://www.google.com",
-                        "https://www.ynet.com/",
-                        "https://www,stackoverflow.com")
+						"https://www.ynet.co.il/",
+						"https://www.stackoverflow.com")
                 .map(URI::create)
                 .map(ThrowingFunction.unchecked(URI::toURL))
                 .map(ThrowingFunction.unchecked(URL::openStream));
