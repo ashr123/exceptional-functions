@@ -9,27 +9,29 @@ Code example:
 ```java
 import io.github.ashr123.exceptional.functions.ThrowingFunction;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
-public class Example
-{
-	public static Stream<InputStream> exampleWithCasting()
-	{
+public class Example {
+	public static Stream<InputStream> exampleWithCasting() {
 		return Stream.of("https://www.google.com",
 						"https://www.ynet.com/",
 						"https://www,stackoverflow.com")
-				.map((ThrowingFunction<String, URL>) URL::new)
-				.map(URL::openStream);
+				.map(URI::create)
+				.map((ThrowingFunction<URI, URL, MalformedURLException>) URI::toURL)
+				.map((ThrowingFunction<URL, InputStream, IOException>) URL::openStream);
 	}
 
-	public static Stream<InputStream> exampleWithCallingUnchecked()
-	{
+	public static Stream<InputStream> exampleWithCallingUnchecked() {
 		return Stream.of("https://www.google.com",
 						"https://www.ynet.com/",
 						"https://www,stackoverflow.com")
-				.map(ThrowingFunction.unchecked(URL::new))
-				.map(URL::openStream);
+				.map(URI::create)
+				.map(ThrowingFunction.unchecked(URI::toURL))
+				.map(ThrowingFunction.unchecked(URL::openStream));
 	}
 }
 ```
