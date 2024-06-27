@@ -18,7 +18,7 @@ import java.net.URL;
 public class Example {
     public static Stream<InputStream> exampleWithCasting() {
         return Stream.of("https://www.google.com",
-                        "https://www.ynet.co.il/",
+                        "https://www.ynet.co.il",
                         "https://www.stackoverflow.com")
                 .map(URI::create)
                 .map((ThrowingFunction<URI, URL, MalformedURLException>) URI::toURL)
@@ -27,7 +27,7 @@ public class Example {
 
     public static Stream<InputStream> exampleWithCallingUnchecked() {
         return Stream.of("https://www.google.com",
-                        "https://www.ynet.co.il/",
+                        "https://www.ynet.co.il",
                         "https://www.stackoverflow.com")
                 .map(URI::create)
                 .map(ThrowingFunction.unchecked(URI::toURL))
