@@ -17,21 +17,40 @@ import java.net.URL;
 
 public class Example {
     public static Stream<InputStream> exampleWithCasting() {
-        return Stream.of("https://www.google.com",
+        return Stream.of(
+                        "https://www.google.com",
                         "https://www.ynet.co.il",
-                        "https://www.stackoverflow.com")
+                        "https://www.stackoverflow.com"
+                )
                 .map(URI::create)
                 .map((ThrowingFunction<URI, URL, MalformedURLException>) URI::toURL)
                 .map((ThrowingFunction<URL, InputStream, IOException>) URL::openStream);
     }
 
-    public static Stream<InputStream> exampleWithCallingUnchecked() {
-        return Stream.of("https://www.google.com",
+    public static Stream<InputStream> exampleWithCastingAndWildcards() {
+        return Stream.of(
+                        "https://www.google.com",
                         "https://www.ynet.co.il",
-                        "https://www.stackoverflow.com")
+                        "https://www.stackoverflow.com"
+                )
+                .map(URI::create)
+                .map((ThrowingFunction<URI, URL, ?>) URI::toURL)
+                .map((ThrowingFunction<URL, InputStream, ?>) URL::openStream);
+    }
+
+    public static Stream<InputStream> exampleWithCallingUnchecked() {
+        return Stream.of(
+                        "https://www.google.com",
+                        "https://www.ynet.co.il",
+                        "https://www.stackoverflow.com"
+                )
                 .map(URI::create)
                 .map(ThrowingFunction.unchecked(URI::toURL))
                 .map(ThrowingFunction.unchecked(URL::openStream));
+    }
+
+    public static <R, T extends Throwable> R doSomeAction(URL url, ThrowingFunction<URL, R, T> action) throws T {
+        return action.applyThrows(url);
     }
 }
 ```
